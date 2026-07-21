@@ -25,3 +25,7 @@ python3 embryo-zero/firmware/embryo_zero.py --demo --iterations 2
 - blink an LED based on mood
 - add simple speech output
 - add GPS or LoRa later
+
+## Small contribution idea
+
+The firmware now exposes a tiny state summary via the voice layer so contributors can see the embryo’s mood and temperature in one line. This makes a good first pull request: improve the phrasing, add a new mood, or make the output more expressive.
