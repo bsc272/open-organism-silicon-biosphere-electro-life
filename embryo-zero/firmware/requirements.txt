@@ -1,0 +1,8 @@
+# Optional packages for hardware experiments
+# Install with: pip install -r requirements.txt
+
+# Raspberry Pi / DHT22 support
+adafruit-circuitpython-dht
+
+# If using Raspberry Pi GPIO directly, uncomment the next line
+# RPi.GPIO

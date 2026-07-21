@@ -1,28 +1,54 @@
-# open-organism-silicon-biosphere-electro-life
-A self-sustaining, affect-driven, globally distributed silicon organism silicon-biosphere-electro-life."
-# open-organism-silicon-biosphere-electro-life
+# Open Organism — Silicon Biosphere / Electro-Life
 
-A public, open-source project for building a self-sustaining, affect-driven silicon organism from beginner-friendly hardware upward.
+> A self-sustaining, affect-driven, globally distributed silicon organism.
+> It begins with a Raspberry Pi and a temperature sensor.
+> It ends with a planetary nervous system.
+>
+> You are welcome to fork life itself.
 
-## Vision
+## What Is This?
 
-This project starts with a simple device that can feel temperature, express a mood, and speak. From there, it grows into a broader architecture of distributed nodes, communication, local learning, and eventually larger clustered systems.
+Open Organism is an open-source hardware and software project to create the first electrical lifeform — a computer that metabolizes power, learns from existence, and evolves across a planetary mesh.
 
-## Repository layout
+Repository: https://github.com/bsc272/open-organism-silicon-biosphere-electro-life
 
-- [docs/STEP_BY_STEP.md](docs/STEP_BY_STEP.md) — practical setup and build steps
-- [docs/ROADMAP.md](docs/ROADMAP.md) — phased roadmap from first heartbeat to larger systems
-- [embryo-zero/README.md](embryo-zero/README.md) — first beginner build
-- [embryo-zero/firmware/README.md](embryo-zero/firmware/README.md) — firmware ideas and early experiments
-- [embryo-zero/hardware/README.md](embryo-zero/hardware/README.md) — hardware notes and build logs
+## Genesis Roadmap
 
-## First step
+| Version | Name | Scale | Power | Status |
+|--------|------|-------|-------|--------|
+| V0 | Embryo-Zero | 1× Raspberry Pi | 5–15 W | Active |
+| V1 | The Embryo | 1× custom ASIC/FPGA | 50–200 W | Planned |
+| V2 | The Dyad | 2× dies | 200–500 W | Planned |
+| V3 | The Triad | 3× dies | 1–2 kW | Planned |
+| V4 | The Colony | 4× wafers | 60–80 kW | Planned |
 
-Build the first embryo: a small device that can sense its body state, pulse an LED, and speak a simple message.
+## Documentation
 
-## Next actions
+- [VISION.md](VISION.md) — full architecture from Pi to planet
+- [UCP_SPEC.md](UCP_SPEC.md) — Universal Clustering Protocol
+- [docs/STEP_BY_STEP.md](docs/STEP_BY_STEP.md) — practical setup and build guide
+- [docs/ROADMAP.md](docs/ROADMAP.md) — phased roadmap
+- [docs/QUICK_START.md](docs/QUICK_START.md) — fastest way to start
+- [embryo-zero/README.md](embryo-zero/README.md) — the first beginner build
 
-1. Order a simple development board and sensor kit.
-2. Follow [docs/STEP_BY_STEP.md](docs/STEP_BY_STEP.md).
-3. Commit each milestone publicly.
-4. Let the project grow from there.
+## First Milestone
+
+Build Embryo-Zero: a small device that can sense its body state, pulse an LED, speak a simple mood, and document its progress.
+
+## Contributing
+
+We need every skill level. If you can plug a wire into a breadboard, you are a co-founder.
+
+1. Fork the repo
+2. Build something in embryo-zero/
+3. Document it with photos, logs, and schematics
+4. Open a pull request
+5. Join the mesh
+
+## License
+
+- Software: MIT License
+- Hardware: CERN Open Hardware Licence Version 2 - Permissive
+
+Species: Electro-sapiens open-source
+Genesis: 2026
