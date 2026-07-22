@@ -192,7 +192,8 @@ def stream() -> Response:
     """Server-Sent Events endpoint — pushes a new reading every 2 seconds."""
 
     def _generate():
-        assert _embryo is not None
+        if _embryo is None:
+            raise RuntimeError("Dashboard not initialized. Call main() first.")
         while True:
             temp = _embryo.read_temperature()
             state = _embryo.affect.update(temp, load=0.1)
@@ -211,7 +212,8 @@ def stream() -> Response:
 @app.route("/state")
 def state() -> Response:
     """JSON snapshot of the current organism state (for polling clients)."""
-    assert _embryo is not None
+    if _embryo is None:
+        raise RuntimeError("Dashboard not initialized. Call main() first.")
     temp = _embryo.read_temperature()
     current_state = _embryo.affect.update(temp, load=0.1)
     payload = {
@@ -238,7 +240,12 @@ def parse_args() -> argparse.Namespace:
         help="use simulated temperature values (no hardware required)",
     )
     parser.add_argument("--port", type=int, default=5000, help="port to listen on (default 5000)")
-    parser.add_argument("--host", default="0.0.0.0", help="host/interface to bind (default 0.0.0.0)")
+    parser.add_argument(
+        "--host",
+        default="127.0.0.1",
+        help="host/interface to bind (default 127.0.0.1 — localhost only). "
+             "Use 0.0.0.0 to expose the dashboard on all network interfaces.",
+    )
     return parser.parse_args()
 
 
