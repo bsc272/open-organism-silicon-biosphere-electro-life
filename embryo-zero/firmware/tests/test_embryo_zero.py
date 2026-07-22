@@ -1,28 +1,12 @@
 """Tests for embryo_zero.py core logic.
 
 These tests run entirely without hardware — no GPIO, DHT22, or Raspberry Pi required.
+Hardware stubs are applied automatically by tests/conftest.py.
 """
 
 from __future__ import annotations
 
-import sys
-import types
 import unittest
-
-# ---------------------------------------------------------------------------
-# Provide minimal stubs for optional hardware libraries so the module can be
-# imported without a Raspberry Pi attached.
-# ---------------------------------------------------------------------------
-
-def _make_stub(name: str) -> types.ModuleType:
-    mod = types.ModuleType(name)
-    sys.modules[name] = mod
-    return mod
-
-
-for _lib in ("board", "digitalio", "adafruit_dht"):
-    if _lib not in sys.modules:
-        _make_stub(_lib)
 
 from embryo_zero import AffectEngine, EmbryoZero, Voice  # noqa: E402
 

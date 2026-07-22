@@ -1,32 +1,16 @@
 """Tests for the Embryo-Zero web dashboard (dashboard.py).
 
 These tests run entirely without hardware — no GPIO, DHT22, or Raspberry Pi required.
+Hardware stubs are applied automatically by tests/conftest.py.
 Flask's built-in test client is used, so no live server is started.
 """
 
 from __future__ import annotations
 
 import json
-import sys
-import types
 import unittest
 
-# ---------------------------------------------------------------------------
-# Stubs for optional hardware libraries
-# ---------------------------------------------------------------------------
-
-
-def _make_stub(name: str) -> types.ModuleType:
-    mod = types.ModuleType(name)
-    sys.modules[name] = mod
-    return mod
-
-
-for _lib in ("board", "digitalio", "adafruit_dht"):
-    if _lib not in sys.modules:
-        _make_stub(_lib)
-
-# Import the module under test after stubs are in place.
+# Import the module under test.
 import dashboard  # noqa: E402
 from embryo_zero import EmbryoZero  # noqa: E402
 

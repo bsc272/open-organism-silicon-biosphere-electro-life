@@ -8,7 +8,7 @@ adafruit-circuitpython-dht
 # RPi.GPIO
 
 # Web dashboard (dashboard.py)
-flask
+flask>=3.0,<4.0
 
 # Test runner
-pytest
+pytest>=8.0,<10.0

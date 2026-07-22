@@ -193,7 +193,7 @@ def stream() -> Response:
 
     def _generate():
         if _embryo is None:
-            raise RuntimeError("Dashboard not initialized. Call main() first.")
+            raise RuntimeError("Dashboard not initialized. Set _embryo before accessing this endpoint.")
         while True:
             temp = _embryo.read_temperature()
             state = _embryo.affect.update(temp, load=0.1)
@@ -213,7 +213,7 @@ def stream() -> Response:
 def state() -> Response:
     """JSON snapshot of the current organism state (for polling clients)."""
     if _embryo is None:
-        raise RuntimeError("Dashboard not initialized. Call main() first.")
+        raise RuntimeError("Dashboard not initialized. Set _embryo before accessing this endpoint.")
     temp = _embryo.read_temperature()
     current_state = _embryo.affect.update(temp, load=0.1)
     payload = {
