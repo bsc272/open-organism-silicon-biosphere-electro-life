@@ -6,3 +6,9 @@ adafruit-circuitpython-dht
 
 # If using Raspberry Pi GPIO directly, uncomment the next line
 # RPi.GPIO
+
+# Web dashboard (dashboard.py)
+flask
+
+# Test runner
+pytest

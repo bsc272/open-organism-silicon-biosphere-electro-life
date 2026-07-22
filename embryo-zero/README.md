@@ -27,6 +27,36 @@ The first milestone is to build a simple organism that can:
 - [firmware/pi_led_demo.py](firmware/pi_led_demo.py) — a Raspberry Pi LED blink demo
 - [firmware/pi_temp_led_demo.py](firmware/pi_temp_led_demo.py) — a temperature-reactive LED demo
 - [firmware/pi_dht22_led_demo.py](firmware/pi_dht22_led_demo.py) — a live DHT22-based demo
+- [firmware/dashboard.py](firmware/dashboard.py) — web dashboard showing live temperature and mood
+
+## Running the firmware demo (no hardware required)
+
+```bash
+python3 embryo-zero/firmware/embryo_zero.py --demo --iterations 5
+```
+
+## Running the web dashboard (no hardware required)
+
+```bash
+pip install flask
+python3 embryo-zero/firmware/dashboard.py --demo
+```
+
+Then open [http://localhost:5000](http://localhost:5000) in your browser.  The dashboard updates live every two seconds showing temperature, mood, and thermal stress.
+
+To run with a real DHT22 sensor (GPIO 4) on a Raspberry Pi:
+
+```bash
+python3 embryo-zero/firmware/dashboard.py
+```
+
+## Running the tests
+
+```bash
+pip install pytest flask
+cd embryo-zero/firmware
+python3 -m pytest tests/ -v
+```
 
 ## Next milestone
 
