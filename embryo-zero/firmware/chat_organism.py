@@ -2,9 +2,9 @@
 # Serves live chat dashboard at http://<esp-ip>
 # Replace WIFI_SSID and WIFI_PASSWORD before flashing
 
-import machine
-import dht
-import network
+import machine  # pyright: ignore[reportMissingImports]
+import dht  # pyright: ignore[reportMissingImports]
+import network  # pyright: ignore[reportMissingImports]
 import socket
 import time
 import json
@@ -129,7 +129,7 @@ def embryo_reply(msg):
     if any(w in msg for w in ["time", "old", "age", "born", "alive"]):
         return "i have been alive for " + str(alive) + " seconds. i was born when you flashed my firmware."
     
-    import urandom
+    import urandom  # pyright: ignore[reportMissingImports]
     responses = [
         "i do not understand... but i am listening. my pulse is " + str(p) + " hz.",
         "my sensor reads " + str(t if t else "nothing") + "C. what do you mean?",
