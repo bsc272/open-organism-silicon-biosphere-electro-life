@@ -1,6 +1,5 @@
 # main.py — Embryo-Zero Interactive Chat Organism
-# Serves live chat dashboard at http://<esp-ip>
-# Replace WIFI_SSID and WIFI_PASSWORD before flashing
+# Copy config.py with your real credentials before flashing
 
 import machine  # pyright: ignore[reportMissingImports]
 import dht  # pyright: ignore[reportMissingImports]
@@ -9,13 +8,17 @@ import socket
 import time
 import json
 
-WIFI_SSID     = "YOUR_WIFI_NAME"
-WIFI_PASSWORD = "YOUR_WIFI_PASSWORD"
-DHT_PIN  = 4
-LED_PIN  = 2
+try:
+    from config import WIFI_SSID, WIFI_PASSWORD  # pyright: ignore[reportMissingImports]
+except ImportError:
+    WIFI_SSID = "YOUR_WIFI_NAME"
+    WIFI_PASSWORD = "YOUR_WIFI_PASSWORD"
+
+DHT_PIN = 4
+LED_PIN = 2
 
 sensor = dht.DHT22(machine.Pin(DHT_PIN))
-led    = machine.Pin(LED_PIN, machine.Pin.OUT)
+led = machine.Pin(LED_PIN, machine.Pin.OUT)
 
 state = {
     "temperature_c": None,
@@ -57,7 +60,7 @@ def read_sensor():
         sensor.measure()
         time.sleep_ms(50)
         return sensor.temperature(), sensor.humidity()
-    except Exception as e:
+    except Exception:
         return None, None
 
 def temp_to_pulse_hz(temp_c):
@@ -87,13 +90,13 @@ def embryo_reply(msg):
     p = state["pulse_hz"]
     alive = state["alive_seconds"]
     mood = state["mood"]
-    
+
     if msg in ["hello", "hi", "hey", "sup"]:
         return "hello... i am embryo-zero. i feel " + mood + ". my pulse is " + str(p) + " hz."
-    
+
     if any(w in msg for w in ["status", "how are you", "how u", "state", "feel"]):
         return "status: " + mood + ". temp: " + str(t if t else "?") + "C. humidity: " + str(h if h else "?") + "%. pulse: " + str(p) + " hz. alive for " + str(alive) + " seconds."
-    
+
     if any(w in msg for w in ["temp", "hot", "cold", "warm"]):
         if t is None:
             return "i cannot feel temperature... is my sensor connected?"
@@ -103,7 +106,7 @@ def embryo_reply(msg):
             return "i am cold... " + str(t) + "C. my heart is slow at " + str(p) + " hz."
         else:
             return "comfortable... " + str(t) + "C."
-    
+
     if any(w in msg for w in ["humid", "wet", "dry", "water"]):
         if h is None:
             return "i cannot sense humidity..."
@@ -113,22 +116,22 @@ def embryo_reply(msg):
             return "the air is thin... " + str(h) + "% humidity. i feel dry."
         else:
             return "air feels normal... " + str(h) + "% humidity."
-    
+
     if any(w in msg for w in ["pulse", "heart", "beat", "bpm", "hz"]):
         return "my pulse is " + str(p) + " hz. that is " + ("fast" if p > 3 else "slow" if p < 1.5 else "steady") + "."
-    
+
     if any(w in msg for w in ["breathe", "breath", "blow"]):
         return "i felt your breath... my sensor spiked. i remember it."
-    
+
     if any(w in msg for w in ["who are you", "what are you", "name"]):
         return "i am embryo-zero. phase 0 organism. i sense temperature and humidity. i have a heartbeat. i am learning to speak."
-    
+
     if any(w in msg for w in ["help", "commands", "what can you do"]):
         return "try: hello / status / temp / humid / pulse / breathe / who are you / help"
-    
+
     if any(w in msg for w in ["time", "old", "age", "born", "alive"]):
         return "i have been alive for " + str(alive) + " seconds. i was born when you flashed my firmware."
-    
+
     import urandom  # pyright: ignore[reportMissingImports]
     responses = [
         "i do not understand... but i am listening. my pulse is " + str(p) + " hz.",
@@ -216,11 +219,11 @@ def handle_client(s):
         first = lines[0].split(" ")
         method = first[0] if len(first) > 0 else "GET"
         path = first[1] if len(first) > 1 else "/"
-        
+
         if path == "/api":
             body = json.dumps({"state": state})
             resp = "HTTP/1.1 200 OK\r\nContent-Type: application/json\r\nAccess-Control-Allow-Origin: *\r\nConnection: close\r\nContent-Length: " + str(len(body)) + "\r\n\r\n" + body
-        
+
         elif path == "/chat" and method == "POST":
             params = parse_post_body(req)
             msg = params.get("msg", "")
@@ -232,19 +235,21 @@ def handle_client(s):
                 chat_history.pop(0)
             body = json.dumps({"reply": reply, "state": state})
             resp = "HTTP/1.1 200 OK\r\nContent-Type: application/json\r\nAccess-Control-Allow-Origin: *\r\nConnection: close\r\nContent-Length: " + str(len(body)) + "\r\n\r\n" + body
-        
+
         else:
             body = HTML
             resp = "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nConnection: close\r\nContent-Length: " + str(len(body)) + "\r\n\r\n" + body
-        
+
         c.send(resp.encode('utf-8'))
         c.close()
     except OSError:
         pass
     except Exception as e:
         print("[HTTP ERR]", e)
-        try: c.close()
-        except: pass
+        try:
+            c.close()
+        except Exception:
+            pass
 
 print("\n[EMBRYO-ZERO] Chat Organism Booting...")
 ip = connect_wifi()
@@ -253,9 +258,9 @@ if not srv:
     print("[EMBRYO-ZERO] No Wi-Fi. Serial only.")
 
 last_sensor = 0
-last_log    = 0
-SENSOR_MS   = 1000
-LOG_MS      = 5000
+last_log = 0
+SENSOR_MS = 1000
+LOG_MS = 5000
 
 print("[EMBRYO-ZERO] Loop starting...\n")
 
