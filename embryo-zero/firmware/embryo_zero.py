@@ -71,6 +71,11 @@ class AffectEngine:
 class Voice:
     """Small voice wrapper. Prints text by default."""
 
+    def summarize_state(self, state: Dict[str, float | str]) -> str:
+        mood = str(state["mood"])
+        temperature = float(state["temperature"])
+        return f"mood={mood} temperature={temperature:.1f}C"
+
     def speak(self, state: Dict[str, float | str]) -> str:
         mood = str(state["mood"])
         temperature = float(state["temperature"])
@@ -85,6 +90,7 @@ class Voice:
 
         text = phrases.get(mood, "I exist.")
         print(f"[voice] {text}")
+        print(f"[state] {self.summarize_state(state)}")
         return text
 
 
