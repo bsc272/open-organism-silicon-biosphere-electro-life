@@ -29,6 +29,8 @@ Repository: https://github.com/bsc272/open-organism-silicon-biosphere-electro-li
 - [docs/STEP_BY_STEP.md](docs/STEP_BY_STEP.md) — practical setup and build guide
 - [docs/ROADMAP.md](docs/ROADMAP.md) — phased roadmap
 - [docs/QUICK_START.md](docs/QUICK_START.md) — fastest way to start
+- [docs/PCB_DESIGN_GUIDE.md](docs/PCB_DESIGN_GUIDE.md) — moving Embryo-Zero from breadboard to custom PCB
+- [docs/VIDEO_GAME_DESIGN_GUIDE.md](docs/VIDEO_GAME_DESIGN_GUIDE.md) — building a companion visualizer/game for the organism's mood state
 - [embryo-zero/README.md](embryo-zero/README.md) — the first beginner build
 
 ## First Milestone
